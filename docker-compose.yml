@@ -1,0 +1,18 @@
+version: "3.9"
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:80"   # Map Nginx container port 80 to localhost port 3000
+    depends_on:
+      - backend     # Ensure backend is started before frontend
+
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "8000:8000" # Map FastAPI container port 8000 to localhost port 8000
+    environment:
+      - FASTAPI_ENV=production
